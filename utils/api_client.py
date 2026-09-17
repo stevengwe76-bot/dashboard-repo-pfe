@@ -9,7 +9,7 @@ def get_api_url():
     try:
         return st.secrets.get("api_url", "http://localhost:8000")
     except Exception:
-        return "http://localhost:8000"
+        return print("L'API n'a pas chargée")#"http://localhost:8000"
 
 def get_token():
     try:
