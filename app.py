@@ -18,6 +18,7 @@ st.set_page_config(
     page_icon  = "🛡️",
     layout     = "wide",
     initial_sidebar_state = "expanded",
+    timeout = 15,
 )
 
 # ── CSS personnalisé ──────────────────────────────────────────────────────────
@@ -50,7 +51,7 @@ st.markdown("""
 .metric-value.info    { color: #60A5FA; }
 .metric-label {
     font-size: 0.78rem;
-    color: #94A3B8;
+    color: #E2E8F0;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-weight: 600;
@@ -561,26 +562,36 @@ elif "Alertes" in page:
         ):
             c1, c2, c3 = st.columns(3)
             with c1:
-                st.markdown(f"**Abonné :** `{row['user_id']}`")
-                st.markdown(f"**Type fraude :** `{row['alert_type']}`")
-                st.markdown(f"**Opérateur :** {row['operator']}")
+                st.markdown(f"<span stype = 'color :#E2E8F0;'>**Abonné :** `{row['user_id']}`</span>",
+                            unsafe_allow_html=True)
+                st.markdown(f"<span stype = 'color :#E2E8F0;'>**Type fraude :** `{row['alert_type']}`</span>",
+                            unsafe_allow_html=True)
+                st.markdown(f"<span stype = 'color :#E2E8F0;'>**Opérateur :** {row['operator']}</span>",
+                            unsafe_allow_html=True)
             with c2:
-                st.markdown(f"**Montant :** `{row['amount']:,.0f} XAF`")
-                st.markdown(f"**Sévérité :** `{row['severity']}`")
-                st.markdown(f"**Région :** {row['region']}")
+                st.markdown(f"<span stype = 'color :#E2E8F0;'>**Montant :** `{row['amount']:,.0f} XAF`</span>",
+                            unsafe_allow_html=True)
+                st.markdown(f"<span stype = 'color :#E2E8F0;'>**Sévérité :** `{row['severity']}`</span>",
+                            unsafe_allow_html=True)
+                st.markdown(f"<span stype = 'color :#E2E8F0;'>**Région :** {row['region']}</span>",
+                            unsafe_allow_html=True)
             with c3:
-                st.markdown(f"**ID Alerte :** `{row['id']}`")
-                st.markdown(f"**ID Transaction :** `{row['transaction_id']}`")
-                st.markdown(f"**Date :** {row['created_at'].strftime('%d/%m/%Y %H:%M')}")
+                st.markdown(f"<span stype = 'color :#E2E8F0;'>**ID Alerte :** `{row['id']}`</span>",
+                            unsafe_allow_html=True)
+                st.markdown(f"<span stype = 'color :#E2E8F0;'>**ID Transaction :** `{row['transaction_id']}`</span>",
+                            unsafe_allow_html=True)
+                st.markdown(f"<span stype = 'color :#E2E8F0;'>**Date :** {row['created_at'].strftime('%d/%m/%Y %H:%M')}</span>",
+                            unsafe_allow_html=True)
 
-            st.markdown(f"📝 *{row['description']}*")
+            st.markdown(f"<p style='color :#CBD5E1;font-style:italic;'>📝 *{row['description']}*</p>",
+                        unsafe_allow_html=True)
 
             # Score gauge
             score_pct = int(row["fraud_score"] * 100)
             gauge_color = "#E63946" if score_pct >= 85 else "#F4A261" if score_pct >= 60 else "#02C39A"
             st.markdown(f"""
             <div style='background:#0F2D52; border-radius:8px; padding:10px 14px; margin:8px 0;'>
-                <div style='font-size:0.78rem; color:#94A3B8; margin-bottom:4px;'>
+                <div style='font-size:0.78rem; color:#E2E8F0; margin-bottom:4px;'>
                     Score de fraude : <b style='color:{gauge_color};'>{score_pct}%</b>
                 </div>
                 <div style='background:#1E3A5F; border-radius:6px; height:10px;'>
